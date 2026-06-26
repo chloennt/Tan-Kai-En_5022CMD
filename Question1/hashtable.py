@@ -88,15 +88,6 @@ class HashTable:
         #actual products only, skip empty and tombstone slots
         return [s for s in self.slots if s is not None and s != "DELETED"]
 
-    def display_ids(self):
-        for i, slot in enumerate(self.slots):
-            if slot is None:
-                print(f"Slot {i}: [empty]")
-            elif slot == "DELETED":
-                print(f"Slot {i}: [deleted]")
-            else:
-                print(f"Slot {i}: {slot.product_id}")
-
     def display_items(self):
         for i, slot in enumerate(self.slots):
             if slot is None:
