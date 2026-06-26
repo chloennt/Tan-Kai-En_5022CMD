@@ -27,7 +27,7 @@ class HashTable:
         start = index
         first_deleted = -1
         while self.slots[index] is not None:
-            #same ID already here? overwrite it - update instead of duplicate
+            #same ID already here, then overwrite it - update instead of duplicate
             if self.slots[index] != "DELETED" and self.slots[index].product_id == product.product_id:
                 self.slots[index] = product
                 return True

@@ -69,7 +69,6 @@ def generate_sample_data(ht, count=10):
         qty = random.randint(10, 100)
         pid = generate_random_product_id(used_ids)
         ht.insert(Medicine(pid, name, med_type, price, qty))
-    print(f"\n{count} sample pharmacy products inserted successfully!")
 
 def compare_hash_vs_array(ht):
     array_data = ht.get_all_products()

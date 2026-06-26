@@ -1,6 +1,5 @@
 from hashtable import HashTable, Medicine
-from helpers import (generate_random_product_id, generate_sample_data,
-                     compare_hash_vs_array, ask_text, ask_number, ask_id)
+from helpers import (generate_random_product_id, generate_sample_data, compare_hash_vs_array, ask_text, ask_number, ask_id)
 
 def inventory_system():
     ht = HashTable(size=101) #prime size spreads keys more evenly
@@ -17,7 +16,7 @@ def inventory_system():
         print("3. Edit Product")
         print("4. Delete Product")
         print("5. Display All With Details")
-        print("6. Compare Hash Table vs Array (Graph)")
+        print("6. Compare Hash Table vs Array (Table + Graph)")
         print("7. Exit\n")
 
         #keep asking for a valid choice without reprinting the whole menu
