@@ -66,7 +66,7 @@ class HashTable:
             if med_type: product.med_type = med_type
             if price is not None: product.price = price
             if quantity is not None: product.quantity = quantity
-            print("Product updated successfully!")
+            print("\nProduct updated successfully!")
             return True
         print("Product not found.")
         return False

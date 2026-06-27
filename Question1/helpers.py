@@ -37,7 +37,7 @@ def ask_number(prompt, is_int=False):
 def ask_id(prompt):
     #keep asking until a valid ID format, or 0 to cancel
     while True:
-        val = input(prompt).strip()
+        val = input(prompt).strip().upper()
         if val == "0":
             return None
         if is_valid_id(val):

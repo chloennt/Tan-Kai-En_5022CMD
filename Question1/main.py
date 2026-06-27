@@ -16,7 +16,7 @@ def inventory_system():
         print("3. Edit Product")
         print("4. Delete Product")
         print("5. Display All With Details")
-        print("6. Compare Hash Table vs Array (Table + Graph)")
+        print("6. Compare Hash Table vs Array (Table+Graph)")
         print("7. Exit\n")
 
         #keep asking for a valid choice without reprinting the whole menu
@@ -33,8 +33,10 @@ def inventory_system():
             print("(Enter 0 to exit back to menu)\n")
             name = ask_text("Enter Product Name: ")
             if name is None: continue
+            name = name.title() #capitalize each word
             med_type = ask_text("Enter Product Type: ")
             if med_type is None: continue
+            med_type = med_type.title()
             price = ask_number("Enter Price: ")
             if price is None: continue
             qty = ask_number("Enter Quantity: ", is_int=True)
@@ -45,9 +47,9 @@ def inventory_system():
             print(f"\nProduct inserted! Assigned ID: {pid}")
 
         elif choice == "2":
-            print("\n==============================================")
-            print("                Search Product                ")
-            print("==============================================")
+            print("\n======================================================================")
+            print("                          Search Product                              ")
+            print("======================================================================")
             print("(Enter 0 to exit back to menu)\n")
             pid = ask_id("Enter Product ID (e.g. M12345678): ")
             if pid is None: continue
@@ -57,17 +59,18 @@ def inventory_system():
                 print(result)
 
         elif choice == "3":
-            print("\n==============================================")
-            print("                 Edit Product                 ")
-            print("==============================================")
+            print("\n======================================================================")
+            print("                           Edit Product                               ")
+            print("======================================================================")
             print("(Enter 0 to exit back to menu)\n")
             pid = ask_id("Enter Product ID to edit: ")
             if pid is None: continue
             product = ht.search(pid)
             if product:
-                print("Editing:", product)
+                print("Editing:")
+                print(product)
                 #blank input means keep the current value
-                nn = input("New name (blank=keep): ")
+                nn = input("\nNew name (blank=keep): ")
                 nt = input("New type (blank=keep): ")
                 np_ = input("New price (blank=keep): ")
                 nq = input("New quantity (blank=keep): ")
@@ -77,7 +80,11 @@ def inventory_system():
                 except ValueError:
                     print("\nInvalid numeric value.")
                     continue
-                ht.edit(pid, name=nn or None, med_type=nt or None, price=pv, quantity=qv)
+                # if user left everything blank, nothing to update
+                if not nn and not nt and not np_ and not nq:
+                    print("\nNothing changed.")
+                else:
+                    ht.edit(pid, name=nn.title() if nn else None, med_type=nt.title() if nt else None, price=pv, quantity=qv)
             else:
                 print("\nProduct not found.")
 
@@ -86,13 +93,14 @@ def inventory_system():
             print("                Delete Product                ")
             print("==============================================")
             print("(Enter 0 to exit back to menu)\n")
-            pid = ask_id("Enter Product ID to delete: ")
-            if pid is None: continue
-            if ht.delete(pid):
-                used_ids.discard(pid) #free the ID for reuse
-                print("\nProduct deleted successfully!")
-            else:
-                print("\nProduct not found.")
+            while True:
+                pid = ask_id("Enter Product ID to delete: ")
+                if pid is None: break #0 = back to menu
+                if ht.delete(pid):
+                    used_ids.discard(pid) #free the ID for reuse
+                    print("\nProduct deleted successfully!")
+                    break
+                print("\nProduct not found. Please try again.")
 
         elif choice == "5":
             print("\n=========================================================================================")
@@ -102,7 +110,7 @@ def inventory_system():
 
         elif choice == "6":
             print("\n==============================================")
-            print("        Hash Table vs Array (Graph)           ")
+            print("      Hash Table vs Array (Table+Graph)       ")
             print("==============================================")
             compare_hash_vs_array(ht)
 
