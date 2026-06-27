@@ -32,7 +32,8 @@ def concurrent_system():
             mt_times, mt_avg = run_multithread(factorial_numbers, rounds)
             for i, t in enumerate(mt_times, 1):
                 print(f"Round {i:02d}: {t:,} ns")
-            print(f"\nAverage: {mt_avg:,.0f} ns")
+            print(f"\nTotal   : {sum(mt_times):,} ns")
+            print(f"Average : {mt_avg:,.0f} ns")
 
         elif choice == "2":
             print("\n==================================================")
@@ -41,33 +42,31 @@ def concurrent_system():
             st_times, st_avg = run_singlethread(factorial_numbers, rounds)
             for i, t in enumerate(st_times, 1):
                 print(f"Round {i:02d}: {t:,} ns")
-            print(f"\nAverage: {st_avg:,.0f} ns")
+            print(f"\nTotal   : {sum(st_times):,} ns")
+            print(f"Average : {st_avg:,.0f} ns")
+
 
         elif choice == "3":
-            print("\n==================================================")
-            print("           Multithread vs Single-thread           ")
-            print("==================================================")
+            print("\n======================================================")
+            print("             Multithread vs Single-thread             ")
+            print("======================================================")
             mt_times, mt_avg = run_multithread(factorial_numbers, rounds)
             st_times, st_avg = run_singlethread(factorial_numbers, rounds)
 
-            print("[Multithreading] Times per round (ns)")
-            for i, t in enumerate(mt_times, 1):
-                print(f"Round {i:02d}: {t:,} ns")
-            print(f"Average: {mt_avg:,.0f} ns")
+            print(f"{'Round':<12}{'Multithread (ns)':<22}{'Single-thread (ns)':<20}")
+            print("-" * 54)
+            for i, (mt, st) in enumerate(zip(mt_times, st_times), 1):
+                print(f"Round {i:02d}  {mt:>18,}    {st:>18,}")
 
-            print("\n[Single-thread] Times per round (ns)")
-            for i, t in enumerate(st_times, 1):
-                print(f"Round {i:02d}: {t:,} ns")
-            print(f"Average: {st_avg:,.0f} ns")
+            print("-" * 54)
+            print(f"{'Total':<10}{sum(mt_times):>18,}    {sum(st_times):>18,}")
+            print(f"{'Average':<10}{mt_avg:>18,.0f}    {st_avg:>18,.0f}")
+            print("-" * 54)
 
-            #summary: how much slower multithreading is
-            print("\n--- Summary ---")
-            print(f"Avg Multithread : {mt_avg:,.0f} ns")
-            print(f"Avg Single-thread: {st_avg:,.0f} ns")
+            #summary
             if st_avg > 0:
                 ratio = (mt_avg / st_avg) * 100
-                print(f"Multithread takes {ratio:.2f}% of the single-thread time.")
-
+                print(f"\nMultithread takes {ratio:.2f}% of the single-thread time.")
             plot_results(mt_times, st_times)
 
         elif choice == "4":
