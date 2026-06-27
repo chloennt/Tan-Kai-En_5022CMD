@@ -49,9 +49,9 @@ def transaction_system():
             display_all(data)
 
         elif choice == "2":
-            print("\n==================================================")
-            print("              Sort by ID (Merge Sort)             ")
-            print("==================================================")
+            print("\n=========================================================================================")
+            print("                                  Sort by ID (Merge Sort)                                ")
+            print("=========================================================================================")
             print("Before sorting:")
             display_all(data)
             reset_call_count() #count recursive calls
@@ -61,9 +61,9 @@ def transaction_system():
             print(f"\nMerge Sort recursive calls: {helpers.merge_call_count}")
 
         elif choice == "3":
-            print("\n==================================================")
-            print("            Sort by Amount (Merge Sort)           ")
-            print("==================================================")
+            print("\n=========================================================================================")
+            print("                                Sort by Amount (Merge Sort)                              ")
+            print("=========================================================================================")
             print("Before sorting:")
             display_all(data)
             reset_call_count()
@@ -73,9 +73,9 @@ def transaction_system():
             print(f"\nMerge Sort recursive calls: {helpers.merge_call_count}")
 
         elif choice == "4":
-            print("\n==================================================")
-            print("             Sort by Date (Merge Sort)            ")
-            print("==================================================")
+            print("\n=========================================================================================")
+            print("                                 Sort by Date (Merge Sort)                               ")
+            print("=========================================================================================")
             print("Before sorting:")
             display_all(data)
             reset_call_count()
@@ -85,9 +85,9 @@ def transaction_system():
             print(f"\nMerge Sort recursive calls: {helpers.merge_call_count}")
 
         elif choice == "5":
-            print("\n==================================================")
-            print("            Search by ID (Binary Search)          ")
-            print("==================================================")
+            print("\n=========================================================================================")
+            print("                                Search by ID (Binary Search)                             ")
+            print("=========================================================================================")
             print("(Enter 0 to exit back to menu)\n")
             print("Note: list is sorted by ID before searching.")
             sorted_data = merge_sort(data, key="transaction_id") #binary needs sorted
@@ -99,12 +99,12 @@ def transaction_system():
                     print("\nTransaction Found:")
                     print(result)
                     break
-                print("\nTransaction not found. Try again or enter 0 to exit.")
+                print("\nTransaction not found. Please try again.")
 
         elif choice == "6":
-            print("\n==================================================")
-            print("            Search by ID (Linear Search)          ")
-            print("==================================================")
+            print("\n=========================================================================================")
+            print("                                Search by ID (Linear Search)                             ")
+            print("=========================================================================================")
             print("(Enter 0 to exit back to menu)\n")
             while True:
                 tid = ask_number("Enter Transaction ID to search: ", is_int=True)
@@ -114,7 +114,7 @@ def transaction_system():
                     print("\nTransaction Found:")
                     print(result)
                     break
-                print("\nTransaction not found. Try again or enter 0 to exit.")
+                print("\nTransaction not found. Please try again.")
 
         elif choice == "7":
             print("\n==================================================")
@@ -135,8 +135,10 @@ def transaction_system():
             print("(Enter 0 to exit back to menu)\n")
             name = ask_text("Enter Customer Name: ")
             if name is None: continue
+            name = name.title() #capitalize each word
             product = ask_text("Enter Product Name: ")
             if product is None: continue
+            product = product.title()
             amount = ask_number("Enter Amount: ", max_val=100000)
             if amount is None: continue
             date = ask_date("Enter Date (YYYY-MM-DD): ")
